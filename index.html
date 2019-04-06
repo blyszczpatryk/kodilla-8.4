@@ -7,9 +7,16 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	</head>
 	<body>
-		<div class="buttons">
-			<h1>make your choice!</h1>
-			<div class="rounds" id="rounds-left"></div>
+		<header>
+			<h1>rock paper scissors</h1>
+		</header>
+		<div class="results">
+			<div class="player">Player</div>
+			<div class="computer">PC</div>
+			<span id="result"></span>
+		</div>
+		<div class="rounds" id="rounds-left"></div>
+		<div class="buttons" id="game-buttons">
 			<button class="play-btn" id="rock">
 				<i class="fas fa-hand-rock" id="rock-icon"></i>
 			</button>
@@ -21,9 +28,8 @@
 			</button>
 		</div>
 		<div class="outputs" id="output"></div>
-		<div class="results" id="result"></div>
 		<div class="new-game">
-			<button id="new-game-btn">new game</button>
+			<button class="start-game-btn" id="new-game-btn">new game</button>
 		</div>
 	<script src="./js/script.js"></script>
 	</body>
