@@ -118,5 +118,5 @@ gameButton.addEventListener('click', function() {
 	showButtons.classList.remove('hide-buttons');
 	playerWinnings = 0;
 	computerWinnings = 0;
-	result.innerHTML += `${playerWinnings} - ${computerWinnings}`;
+	result.innerHTML = `${playerWinnings} - ${computerWinnings}`;
 });
