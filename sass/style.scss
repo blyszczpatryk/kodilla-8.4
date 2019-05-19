@@ -117,6 +117,7 @@ header {
 }
 
 .overlay {
+	overflow: auto;
 	display: none;
 	position: fixed;
 	top: 0;
@@ -130,18 +131,36 @@ header {
 }
 
 .modal {
-	background: #fff;
-	width: 500px;
+	background: $orange;
+	border-radius: 5px;
+	max-width: 100%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate3d(-50%, -50%, 0);
+	.content {
+		color: #fff;
+	}
 	.close {
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: 3px;
+		top: -2px;
 		padding: 5px;
 		color: #000;
 		text-decoration: none;
+	}
+	table {
+		margin: 10px;
+		text-align: center;
+		tr {
+		  	background: #fff;
+		  	font-size: 17px;
+		  	td {
+				padding: 5px;
+			}
+			th {
+				padding: 10px;
+			}
+		}
 	}
 }

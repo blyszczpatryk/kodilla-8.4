@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<header>
-			<h1>rock paper scissors</h1>
+			<h1>paper rock scissors</h1>
 		</header>
 		<div class="results">
 			<div class="player">Player</div>
@@ -17,11 +17,11 @@
 		</div>
 		<div class="rounds" id="rounds-left"></div>
 		<div class="buttons" id="game-buttons">
-			<button class="play-btn player-move" id="rock" data-move="rock">
-				<i class="fas fa-hand-rock" id="rock-icon"></i>
-			</button>
 			<button class="play-btn player-move" id="paper" data-move="paper">
 				<i class="fas fa-hand-paper"></i>
+			</button>
+			<button class="play-btn player-move" id="rock" data-move="rock">
+				<i class="fas fa-hand-rock" id="rock-icon"></i>
 			</button>
 			<button class="play-btn player-move" id="scissors" data-move="scissors">
 				<i class="fas fa-hand-scissors"></i>
@@ -35,9 +35,10 @@
 		<!-- modal -->
 
 		<div class="overlay" id="modal-overlay">
-			<div class="modal" id="modal-one">
+			<div class="modal" id="results-modal">
 				<a href="#" class="close">x</a>
 				<div class="content outputs"></div>
+				<table></table>
 			</div>
 		</div>
 

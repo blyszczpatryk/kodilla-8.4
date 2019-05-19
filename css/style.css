@@ -32,10 +32,20 @@ header h1 { font-size: 40px; color: #FA9429; }
 
 .hide-buttons { display: none; }
 
-.overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
+.overlay { overflow: auto; display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); }
 
 .overlay.show { display: block; }
 
-.modal { background: #fff; width: 500px; position: absolute; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); }
+.modal { background: #FA9429; border-radius: 5px; max-width: 100%; position: absolute; top: 50%; left: 50%; transform: translate3d(-50%, -50%, 0); }
 
-.modal .close { position: absolute; right: 0; top: 0; padding: 5px; color: #000; text-decoration: none; }
+.modal .content { color: #fff; }
+
+.modal .close { position: absolute; right: 3px; top: -2px; padding: 5px; color: #000; text-decoration: none; }
+
+.modal table { margin: 10px; text-align: center; }
+
+.modal table tr { background: #fff; font-size: 17px; }
+
+.modal table tr td { padding: 5px; }
+
+.modal table tr th { padding: 10px; }
