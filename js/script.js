@@ -8,6 +8,8 @@ var result = document.getElementById('result');
 
 var rounds = document.getElementById('rounds-left');
 
+var modalOutput = document.getElementsByClassName('content');
+
 var params = {
 	roundsNumber: 0,
 	playerWinnings: 0,
@@ -25,9 +27,39 @@ var computerPick = params.moveNames[Math.floor(Math.random() * 3) + 1];
 
 var showButtons = document.getElementById('game-buttons');
 
+function showModal(){
+	document.querySelector('#modal-overlay').classList.add('show');
+};
+
+function hideModal(){
+	document.querySelector('#modal-overlay').classList.remove('show');
+};
+
+var closeButtons = document.querySelectorAll('.modal .close');
+	
+for(var i = 0; i < closeButtons.length; i++){
+	closeButtons[i].addEventListener('click', hideModal);
+};
+
+document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+
+var modals = document.querySelectorAll('.modal');
+	
+for(var i = 0; i < modals.length; i++){
+	modals[i].addEventListener('click', function(event){
+		event.stopPropagation();
+	});
+};
+
+document.addEventListener('keyup', function(e) {
+  	if(e.keyCode === 27) {
+    	hideModal();
+  	}
+});
+
 function hideElements(){
 	showButtons.classList.add('hide-buttons');
-}
+};
 
 function showRounds(){
 	if (params.roundsNumber > 0){
@@ -38,17 +70,18 @@ function showRounds(){
 
 function winner(){
 	if (params.roundsNumber == 0 && params.playerWinnings > params.computerWinnings){
-		output.innerHTML = 'YOU WON THE ENTIRE GAME!';
 		hideElements();
+		showModal();
+		modalOutput.innerHTML = 'YOU WON THE ENTIRE GAME!';
 	}
 	else if (params.roundsNumber == 0 && params.playerWinnings < params.computerWinnings){
-		output.innerHTML = 'YOU LOST THE GAME!';
 		hideElements();
+		showModal();
+		modalOutput.innerHTML = 'YOU LOST THE GAME!';
 	}
 	else if (params.roundsNumber == 0 && params.playerWinnings === params.computerWinnings){
-		params.roundsNumber++;
-		output.innerHTML = 'TIE! ONE EXTRA PICK!';
-		rounds.innerHTML = `Rounds left: ${params.roundsNumber}`;
+		showModal();
+		modalOutput.innerHTML = 'TIE!';
 	}
 
 };
