@@ -54,13 +54,9 @@ function generateTable(table, data) {
       		let cell = row.insertCell();
       		let text = document.createTextNode(element[key]);
       		cell.appendChild(text);
-
-      		console.log(element[key])
     	}
   	}
 }
-
-console.log(table)
 
 function removeTable() {
 	const tableParrent = document.getElementById('results-modal');
@@ -75,6 +71,8 @@ function showModal(){
 
 function hideModal(){
 	document.querySelector('#modal-overlay').classList.remove('show');
+	emptyArray();
+	
 };
 
 const closeButtons = document.querySelectorAll('.modal .close');
@@ -110,29 +108,24 @@ function showRounds(){
 	}
 };
 
+function winnings(text){
+	modalOutput.innerHTML = text;
+	hideElements();
+	showModal();
+	let data = Object.keys(params.progress[0])
+	generateTableHead(table, data);
+	generateTable(table, params.progress);
+}
+
 function winner(){
 	if (params.roundsNumber == 0 && params.playerWinnings > params.computerWinnings){
-		hideElements();
-		showModal();
-		modalOutput.innerHTML = 'YOU WON THE ENTIRE GAME!';
-		let data = Object.keys(params.progress[0])
-		generateTableHead(table, data);
-		generateTable(table, params.progress);
+		winnings('YOU WON THE ENTIRE GAME!');
 	}
 	else if (params.roundsNumber == 0 && params.playerWinnings < params.computerWinnings){
-		hideElements();
-		showModal();
-		modalOutput.innerHTML = 'YOU LOST THE GAME!';
-		let data = Object.keys(params.progress[0])
-		generateTableHead(table, data);
-		generateTable(table, params.progress);
+		winnings('YOU LOST THE GAME!');
 	}
 	else if (params.roundsNumber == 0 && params.playerWinnings === params.computerWinnings){
-		showModal();
-		modalOutput.innerHTML = 'TIE!';
-		let data = Object.keys(params.progress[0])
-		generateTableHead(table, data);
-		generateTable(table, params.progress);
+		winnings('TIE');
 	}
 
 };
@@ -168,7 +161,7 @@ function computerRandom(){
 	computerPick = computerRandom();
 	countWinnings(playerPick, computerPick);
 	showRounds(params.roundsNumber);
-	winner(params.roundsNumber, params.playerWinnings, params.computerWinnings);
+	
 
 	objects = {
 		RoundNumber: params.roundsNumber,
@@ -179,9 +172,8 @@ function computerRandom(){
 	}
 
 	params.progress.push(objects);
-	
-	console.log(params.progress)
-	
+
+	winner();
 }
 
 
@@ -199,5 +191,4 @@ newGameButton.addEventListener('click', function() {
 	params.computerWinnings = 0;
 	result.innerHTML = `${params.playerWinnings} - ${params.computerWinnings}`;
 	output.innerHTML = 'NEW GAME HAS STARTED!';
-	emptyArray();
 });
