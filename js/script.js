@@ -32,10 +32,6 @@ let playerPick;
 
 let computerPick = params.moveNames[Math.floor(Math.random() * 3) + 1];
 
-function emptyArray() {
-	params.progress.length = 0;
-}
-
 function generateTableHead(table, data) {
 	let thead = table.createTHead();
 	let row = thead.insertRow();
@@ -45,7 +41,7 @@ function generateTableHead(table, data) {
 		th.appendChild(text);
 		row.appendChild(th);
 	}
-}
+};
 
 function generateTable(table, data) {
   	for (let element of data) {
@@ -56,46 +52,14 @@ function generateTable(table, data) {
       		cell.appendChild(text);
     	}
   	}
-}
+};
 
 function removeTable() {
-	const tableParrent = document.getElementById('results-modal');
-	tableParrent.removeChild(table);
-}
-
-const showButtons = document.getElementById('game-buttons');
-
-function showModal(){
-	document.querySelector('#modal-overlay').classList.add('show');
+	var tableParrent = document.getElementById('myTable');
+	for(var i = tableParrent.rows.length - 1; i >= 0; i--) {
+		tableParrent.deleteRow(i);
+	}
 };
-
-function hideModal(){
-	document.querySelector('#modal-overlay').classList.remove('show');
-	emptyArray();
-	
-};
-
-const closeButtons = document.querySelectorAll('.modal .close');
-	
-for(let i = 0; i < closeButtons.length; i++){
-	closeButtons[i].addEventListener('click', hideModal);
-};
-
-document.querySelector('#modal-overlay').addEventListener('click', hideModal);
-
-const modals = document.querySelectorAll('.modal');
-	
-for(let i = 0; i < modals.length; i++){
-	modals[i].addEventListener('click', function(event){
-		event.stopPropagation();
-	});
-};
-
-document.addEventListener('keyup', function(e) {
-  	if(e.keyCode === 27) {
-    	hideModal();
-  	}
-});
 
 function hideElements(){
 	showButtons.classList.add('hide-buttons');
@@ -115,7 +79,7 @@ function winnings(text){
 	let data = Object.keys(params.progress[0])
 	generateTableHead(table, data);
 	generateTable(table, params.progress);
-}
+};
 
 function winner(){
 	if (params.roundsNumber == 0 && params.playerWinnings > params.computerWinnings){
@@ -164,7 +128,7 @@ function computerRandom(){
 	
 
 	objects = {
-		RoundNumber: params.roundsNumber,
+		RoundNumber: [params.roundsNumber + 1],
 		PlayerMove: playerPick,
 		ComputerMove: computerPick,
 		RoundResult: roundResult,
@@ -173,8 +137,10 @@ function computerRandom(){
 
 	params.progress.push(objects);
 
+	console.log(params.progress)
+
 	winner();
-}
+};
 
 
 const gameButtons = document.getElementsByClassName('player-move');
@@ -191,4 +157,38 @@ newGameButton.addEventListener('click', function() {
 	params.computerWinnings = 0;
 	result.innerHTML = `${params.playerWinnings} - ${params.computerWinnings}`;
 	output.innerHTML = 'NEW GAME HAS STARTED!';
+	params.progress = [];
+	removeTable();
+});
+
+const showButtons = document.getElementById('game-buttons');
+
+function showModal(){
+	document.querySelector('#modal-overlay').classList.add('show');
+};
+
+function hideModal(){
+	document.querySelector('#modal-overlay').classList.remove('show');
+};
+
+const closeButtons = document.querySelectorAll('.modal .close');
+	
+for(let i = 0; i < closeButtons.length; i++){
+	closeButtons[i].addEventListener('click', hideModal);
+};
+
+document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+
+const modals = document.querySelectorAll('.modal');
+	
+for(let i = 0; i < modals.length; i++){
+	modals[i].addEventListener('click', function(event){
+		event.stopPropagation();
+	});
+};
+
+document.addEventListener('keyup', function(e) {
+  	if(e.keyCode === 27) {
+    	hideModal();
+  	}
 });
